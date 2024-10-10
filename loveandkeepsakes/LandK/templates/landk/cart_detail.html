@@ -1,0 +1,87 @@
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Your Shopping Cart</h1>
+    <table class="w-full">
+        <thead>
+            <tr>
+                <th class="text-left">Product</th>
+                <th class="text-left">Image</th>
+                <th class="text-left">Quantity</th>
+                <th class="text-left">Unit Price</th>
+                <th class="text-left">Price</th>
+                <th class="text-left">Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td><img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="w-16 h-16 object-cover"></td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.price }}</td>
+                <td>${{ item.total_price }}</td>
+                <td>
+                    <button class="text-red-500 remove-button" data-product-id="{{ item.product.id }}" data-product-name="{{ item.product.name }}">Remove</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="mt-6">
+        <p class="text-xl font-semibold">Total: ${{ cart.get_total_price }}</p>
+    </div>
+    <div class="mt-6">
+        <a href="{% url 'product_list' %}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Continue Shopping</a>
+        <a href="#" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 ml-4">Proceed to Checkout</a>
+    </div>
+</div>
+
+<!-- Confirmation dialog 
+<div id="remove-confirmation" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded">
+        <h2 class="text-xl mb-4">Are you sure you want to remove <span id="product-name"></span>?</h2>
+        <input type="number" id="remove-quantity" placeholder="Quantity" min="1" class="border rounded px-2 py-1 w-full">
+        <div class="mt-4">
+            <button id="confirm-remove" class="bg-red-500 text-white px-4 py-2 rounded">Yes</button>
+            <button id="cancel-remove" class="bg-gray-300 text-black px-4 py-2 rounded ml-2">Cancel</button>
+        </div>
+    </div>
+</div>
+-->
+
+<script>
+document.querySelectorAll('.remove-button').forEach(button => {
+    button.addEventListener('click', function() {
+        const productId = this.getAttribute('data-product-id');
+        const productName = this.getAttribute('data-product-name');
+        document.getElementById('product-name').textContent = productName;
+        document.getElementById('remove-confirmation').classList.remove('hidden');
+        const confirmButton = document.getElementById('confirm-remove');
+
+        confirmButton.onclick = function() {
+            const quantity = document.getElementById('remove-quantity').value || 0;
+            const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+
+            fetch(`/cart/remove/${productId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ quantity: quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload(); // Refresh the cart page
+                }
+            });
+        };
+    });
+});
+
+document.getElementById('cancel-remove').onclick = function() {
+    document.getElementById('remove-confirmation').classList.add('hidden');
+};
+</script>
+{% endblock %}

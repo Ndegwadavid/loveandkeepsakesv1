@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&K Shop</title>
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-section">
+            <div class="logo">L&K</div>
+        </div>
+        <div class="search-section">
+            <form method="get" action="#" class="search-bar">
+                <input type="text" name="search" placeholder="Search products">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-1 rounded">Search</button>
+            </form>
+        </div>
+        <div class="cart-section">
+            <a href="#" class="text-xl">
+                🛒 <span id="cart-items-count" class="text-sm">{{ cart_items_count }}</span>
+            </a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+    
+    <div class="main-container">
+        <nav class="sidebar" id="sidebar">
+            <h2 class="text-xl font-semibold mb-4">Categories</h2>
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{% url 'product_list' %}?category={{ category.slug }}" class="text-blue-500 hover:underline">{{ category.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <main class="content">
+            <div class="highlight">
+                <img src="{% static 'images/quote.jpg' %}" alt="Highlight Image">
+                <div class="highlight-text">
+                    <h1>Engrave your special message</h1><br>
+                    <p>Enjoying special moments? <br>Create memories through keepsakes</p>
+                    <a href="#"><button>Make now</button></a>
+                </div>
+            </div>
+    
+            <h2 class="text-3xl font-bold mb-6">Our Products</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                {% for product in products %}
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-48 object-cover">
+                    {% else %}
+                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center">No Image</div>
+                    {% endif %}
+                    <div class="p-4">
+                        <h2 class="text-xl font-semibold mb-2">{{ product.name }}</h2>
+                        <p class="text-gray-600 mb-2">${{ product.price }}</p>
+                        <form class="add-to-cart-form" data-url="{% url 'cart_add' product.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="w-16 border rounded px-2 py-1 mr-2">
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No products found.</p>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script>
+    $(document).ready(function() {
+        $('.add-to-cart-form').on('submit', function(event) {
+            event.preventDefault();
+            var form = $(this);
+            var url = form.data('url');
+            var data = form.serialize();
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                success: function(response) {
+                    $('#cart-items-count').text(response.cart_items_count);
+                    alert('Item added to cart successfully!');
+                },
+                error: function(xhr) {
+                    alert('An error occurred while adding the item to the cart.');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
