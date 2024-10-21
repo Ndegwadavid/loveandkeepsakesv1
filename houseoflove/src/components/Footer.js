@@ -6,11 +6,11 @@ import { Facebook, Instagram, Twitter } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className="bg-pink-800 text-white py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">MaryStore</h3>
+            <h3 className="text-xl font-bold mb-4">Houseoflove</h3>
             <p className="mb-4">Your one-stop shop for all things beautiful and unique.</p>
             <div className="flex space-x-4">
               <a href="#" className="hover:text-pink-500"><Facebook /></a>
@@ -30,12 +30,12 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
             <p>00100 Nairobi Moi Avenue</p>
-            <p>Phone: (=254) 797342380</p>
-            <p>Email: info@marystore.com</p>
+            <p>Phone: (=254) 715840641</p>
+            <p>Email: info@houseoflove.com</p>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-          <p>&copy; 2023 MaryStore. All rights reserved.</p>
+          <p>&copy; 2023 Houseoflove. All rights reserved.</p>
         </div>
       </div>
     </footer>

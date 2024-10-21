@@ -4,35 +4,36 @@ import { Heart, ShoppingCart, Play, Pause } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 import { motion } from 'framer-motion';
+import Footer from '../components/Footer';
 
 const products = [
   {
     id: 1,
     name: "Personalized Love Locket",
     price: 3500,
-    image: "/images/love-locket.jpg",
+    image: "/images/love-locket.jpeg",
     description: "A beautiful heart-shaped locket that can be engraved with your loved one's initials."
   },
   {
     id: 2,
-    name: "Romantic Starry Night Lamp",
+    name: "Imprinted Notebook",
     price: 4200,
-    image: "/images/starry-lamp.jpg",
-    description: "Project a magical starry night sky in your room, perfect for romantic evenings."
+    image: "/images/book.jpeg",
+    description: "This personalized notebook has your names imprinted on the cover, perfect for jotting down thoughts and memories together."
   },
   {
     id: 3,
-    name: "Couple's Wooden Watch Set",
+    name: "Teddy Love bear",
     price: 7500,
-    image: "/images/wooden-watches.jpg",
-    description: "Elegant his and hers wooden watches, symbolizing your timeless love."
+    image: "/images/teddy.jpeg",
+    description: "This love teddy bear is sure to bring a smile to your loved one’s face and serve as a lasting reminder of your affection."
   },
   {
     id: 4,
-    name: "Love Letter Blanket",
+    name: "Succulent Plants",
     price: 5600,
-    image: "/images/letter-blanket.jpg",
-    description: "A cozy blanket featuring your personalized love letter or vows."
+    image: "/images/plant.jpeg",
+    description: "A low maintenance plant that symbolizes growth and nurturing."
   }
 ];
 
@@ -69,7 +70,7 @@ const Home = () => {
     <div className="bg-pink-50 min-h-screen">
       <header className="relative h-screen flex items-center justify-center overflow-hidden">
         <img 
-          src="/images/header-background.jpg" 
+          src="/images/lovekeepsakes.jpeg" 
           alt="Romantic background" 
           className="absolute w-full h-full object-cover"
         />
@@ -81,7 +82,7 @@ const Home = () => {
             transition={{ duration: 1 }}
             className="text-6xl font-bold mb-4"
           >
-            House of Love and Keepsakes
+            Love and Keepsakes
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
@@ -171,46 +172,39 @@ const Home = () => {
           </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-semibold text-center mb-8">Express Your Love</h2>
-          <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white p-8 rounded-lg shadow-md text-center"
-          >
-            <p className="text-lg mb-6">
-              Love is a beautiful journey, and our keepsakes are here to help you celebrate every step of the way. 
-              From the first butterflies of a new romance to the deep, enduring love of a lifetime together, 
-              we have the perfect gift to express your feelings.
-            </p>
-            <Link to="/products" className="bg-red-500 text-white px-6 py-3 rounded-full font-bold hover:bg-red-600 transition duration-300">
-              Find Your Perfect Keepsake
-            </Link>
-          </motion.div>
-        </section>
+        <section className="bg-pink-50 py-16">
+  <div className="container mx-auto px-4">
+    <h2 className="text-4xl font-bold text-center mb-8">Express Your Love</h2>
+    <div className="bg-white p-8 rounded-lg shadow-md text-center">
+      <p className="text-lg mb-6">
+        Love is a beautiful and timeless journey. Our carefully curated keepsakes are here to help you celebrate every special moment, from the first flutters of a new romance to the deep, enduring love of a lifetime together. We have the perfect gift to express your feelings and create lasting memories.
+      </p>
+      <Link to="/products" className="bg-red-500 text-white px-8 py-4 rounded-full font-bold hover:bg-red-600 transition duration-300 text-lg">
+        Shop
+      </Link>
+    </div>
+  </div>
+</section>
 
-        <section>
-          <h2 className="text-3xl font-semibold text-center mb-8">Customer Love Stories</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {[
-              { name: "Sarah & John, Nairobi", story: "The personalized star map I got for our anniversary was absolutely perfect. It's now the centerpiece of our living room and reminds us daily of our special night." },
-              { name: "Michael, Mombasa", story: "I gifted my wife the Love Letter Blanket for her birthday, and she was moved to tears. It's not just a gift, it's a treasure we'll keep forever." }
-            ].map((testimonial, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.5 }}
-                className="bg-white p-6 rounded-lg shadow-md"
-              >
-                <p className="italic mb-4">{testimonial.story}</p>
-                <p className="font-semibold">- {testimonial.name}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+<section className="bg-white py-16">
+  <div className="container mx-auto px-4">
+    <h2 className="text-4xl font-bold text-center mb-8">Customer Love Stories</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {[
+        { name: "Sarah & John, Nairobi", story: "The personalized star map we got for our anniversary was absolutely perfect. It's now the centerpiece of our living room, a beautiful reminder of our special night under the stars." },
+        { name: "Michael, Mombasa", story: "I gifted my wife the Love Letter Blanket for her birthday, and she was moved to tears. It's not just a gift, it's a treasure we'll keep and cherish forever." }
+      ].map((testimonial, index) => (
+        <div key={index} className="bg-pink-50 p-6 rounded-lg shadow-md">
+          <p className="italic mb-4 text-lg">{testimonial.story}</p>
+          <p className="font-semibold text-xl">- {testimonial.name}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
       </main>
+
+      <Footer /> {/* Render the Footer component */}
     </div>
   );
 };

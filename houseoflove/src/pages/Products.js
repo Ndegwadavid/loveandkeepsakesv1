@@ -15,9 +15,9 @@ const Products = () => {
   
   const priceRanges = [
     { label: 'All', value: 'all' },
-    { label: 'Under $25', value: '0-25' },
-    { label: '$25 - $50', value: '25-50' },
-    { label: 'Over $50', value: '50-plus' }
+    { label: 'Under Ksh 2500', value: '0-25' },
+    { label: 'Ksh2500 - Ksh 5000', value: '25-50' },
+    { label: 'Over Ksh 5000', value: '50-plus' }
   ];
 
   useEffect(() => {

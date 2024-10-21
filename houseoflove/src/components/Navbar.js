@@ -12,7 +12,7 @@ const Navbar = () => {
   const favoritesCount = favorites?.length || 0;
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-red-100 shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link 
@@ -20,11 +20,11 @@ const Navbar = () => {
             className="flex items-center space-x-2 hover:opacity-90 transition-opacity"
           >
             <img 
-              src="/images/logo.svg" 
-              alt="HOuseoflove" 
+              src="/images/2.svg" 
+              alt="Houseoflove" 
               className="h-8 w-auto"
             />
-            <span className="text-xl font-bold text-gray-800"></span>
+            <span className="text-xl font-bold text-gray-800">House Of Love</span>
           </Link>
 
           <div className="flex items-center space-x-6">

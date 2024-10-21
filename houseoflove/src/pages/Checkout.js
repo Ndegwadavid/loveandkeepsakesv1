@@ -27,8 +27,7 @@ const Checkout = () => {
   });
   const [errors, setErrors] = useState({});
   const [isProcessing, setIsProcessing] = useState(false);
-  const [checkoutType, setCheckoutType] = useState('guest'); // New state for checkout type
-  const exchangeRate = 140; // Example exchange rate from USD to KES
+  const [checkoutType, setCheckoutType] = useState('guest');
 
   useEffect(() => {
     if (cart.length === 0) {
@@ -129,8 +128,6 @@ const Checkout = () => {
     visible: { opacity: 1 }
   };
 
-  const totalInKES = (getCartTotal() * exchangeRate).toFixed(2); // Convert total to KES
-
   return (
     <motion.div 
       initial="hidden"
@@ -157,19 +154,19 @@ const Checkout = () => {
               Guest
             </label>
             <label className="flex items-center">
-  <input
-    type="radio"
-    name="checkoutType"
-    value="account"
-    checked={checkoutType === 'account'}
-    onChange={() => {
-      setCheckoutType('account');
-      navigate('/create-account'); // Redirect to account creation
-    }}
-    className="mr-2"
-  />
-  Create Account
-</label>
+              <input
+                type="radio"
+                name="checkoutType"
+                value="account"
+                checked={checkoutType === 'account'}
+                onChange={() => {
+                  setCheckoutType('account');
+                  navigate('/create-account'); // Redirect to account creation
+                }}
+                className="mr-2"
+              />
+              Create Account
+            </label>
           </div>
         </div>
 
@@ -189,7 +186,7 @@ const Checkout = () => {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <h3 className="text-xl font-semibold mb-4 flex items-center">
-                <User className="mr-2" /> Personal Information
+                <User className="mr-2" /> Your Information
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 <InputField
@@ -288,7 +285,7 @@ const Checkout = () => {
 
           {/* Payment Information */}
           <motion.div 
-            className="bg-white p-6 rounded-lg shadow-md"
+            className="bg-red-100 p-6 rounded-lg shadow-md"
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
@@ -364,7 +361,7 @@ const Checkout = () => {
                   />
                   <div className="bg-yellow-100 p-4 rounded-md mb-4">
                     <p className="text-sm">
-                      Please send <span className="font-bold">${getCartTotal().toFixed(2)}</span> to M-Pesa Till Number: <span className="font-bold">0757105412</span>
+                      Please send the total amount to M-Pesa Till Number: <span className="font-bold">0715840641</span>
                     </p>
                   </div>
                   <InputField
@@ -416,7 +413,7 @@ const Checkout = () => {
           animate={{ x: 0 }}
           transition={{ type: "spring", stiffness: 100 }}
         >
-          <div className="bg-white p-6 rounded-lg shadow-md sticky top-6">
+          <div className="bg-blue-100 p-6 rounded-lg shadow-md sticky top-6">
             <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
             <div className="space-y-4">
               {cart.map((item) => (
@@ -432,7 +429,7 @@ const Checkout = () => {
                     <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                   </div>
                   <p className="font-medium">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    {item.quantity * item.price} KES
                   </p>
                 </motion.div>
               ))}
@@ -444,7 +441,7 @@ const Checkout = () => {
               >
                 <div className="flex justify-between font-semibold text-lg">
                   <p>Total</p>
-                  <p>${getCartTotal().toFixed(2)} / KES {totalInKES}</p> {/* Display total in KES */}
+                  <p>{getCartTotal()} KES</p>
                 </div>
               </motion.div>
             </div>

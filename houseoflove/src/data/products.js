@@ -2,7 +2,7 @@ const products = [
   {
     id: 1,
     name: "Lavender Scented Candle",
-    price: 24.99,
+    price: 1499.99,
     description: "Hand-poured soy wax candle with essential oils",
     image: "/images/lavender.jpeg",
     category: "Candles",
@@ -18,7 +18,7 @@ const products = [
   {
     id: 2,
     name: "Vanilla Scented Candle",
-    price: 24.99,
+    price: 1499,
     description: "Hand-poured soy wax candle with essential oils",
     image: "/images/vanilla.jpeg",
     category: "Candles",
@@ -34,7 +34,7 @@ const products = [
   {
     id: 3,
     name: "Citrus Scented Candle",
-    price: 24.99,
+    price: 1499,
     description: "Hand-poured soy wax candle with essential oils",
     image: "/images/citrus.jpeg",
     category: "Candles",
@@ -50,7 +50,7 @@ const products = [
   {
     id: 4,
     name: "Eucalyptus Scented Candle",
-    price: 24.99,
+    price: 1499,
     description: "Hand-poured soy wax candle with essential oils",
     image: "/images/eucalyptus.jpeg",
     category: "Candles",
@@ -66,7 +66,7 @@ const products = [
   {
     id: 5,
     name: "Rose Scented Candle",
-    price: 24.99,
+    price: 1499,
     description: "Hand-poured soy wax candle with essential oils",
     image: "/images/rose.jpeg",
     category: "Candles",
@@ -82,7 +82,7 @@ const products = [
   {
     id: 6,
     name: "Gift Box Set",
-    price: 49.99,
+    price: 1499,
     description: "Curated gift box with premium items",
     image: "/images/gift.jpeg",
     category: "Gifts",
@@ -98,7 +98,7 @@ const products = [
   {
     id: 7,
     name: "Inspirational Book",
-    price: 19.99,
+    price: 800,
     description: "A collection of motivational stories",
     image: "/images/book.jpeg",
     category: "Books",
@@ -114,7 +114,7 @@ const products = [
   {
     id: 8,
     name: "Imprinted Notebook",
-    price: 29.99,
+    price: 800,
     description: "Easy recipes for novice cooks",
     image: "/images/notebook.jpeg",
     category: "Books",
