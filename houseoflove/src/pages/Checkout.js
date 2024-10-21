@@ -429,7 +429,7 @@ const Checkout = () => {
                     <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                   </div>
                   <p className="font-medium">
-                    {item.quantity * item.price} KES
+                    {item.quantity * item.price} Ksh
                   </p>
                 </motion.div>
               ))}
@@ -441,7 +441,7 @@ const Checkout = () => {
               >
                 <div className="flex justify-between font-semibold text-lg">
                   <p>Total</p>
-                  <p>{getCartTotal()} KES</p>
+                  <p>Ksh {getCartTotal()} </p>
                 </div>
               </motion.div>
             </div>

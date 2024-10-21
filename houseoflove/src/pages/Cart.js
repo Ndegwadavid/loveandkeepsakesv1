@@ -38,7 +38,7 @@ const Cart = () => {
             />
             <div className="flex-grow">
               <h3 className="font-semibold">{item.name}</h3>
-              <p className="text-gray-600">${item.price.toFixed(2)}</p>
+              <p className="text-gray-600">Ksh {item.price.toFixed(2)}</p>
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -66,7 +66,7 @@ const Cart = () => {
       </div>
       <div className="mt-6 flex justify-between items-center">
         <div className="text-xl font-semibold">
-          Total: ${getCartTotal().toFixed(2)}
+          Total: Ksh {getCartTotal().toFixed(2)}
         </div>
         <Link
           to="/checkout"

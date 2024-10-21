@@ -10,28 +10,28 @@ const products = [
   {
     id: 1,
     name: "Personalized Love Locket",
-    price: 3500,
+    price: 1500,
     image: "/images/love-locket.jpeg",
     description: "A beautiful heart-shaped locket that can be engraved with your loved one's initials."
   },
   {
     id: 2,
     name: "Imprinted Notebook",
-    price: 4200,
+    price: 800,
     image: "/images/book.jpeg",
     description: "This personalized notebook has your names imprinted on the cover, perfect for jotting down thoughts and memories together."
   },
   {
     id: 3,
     name: "Teddy Love bear",
-    price: 7500,
+    price: 2500,
     image: "/images/teddy.jpeg",
     description: "This love teddy bear is sure to bring a smile to your loved one’s face and serve as a lasting reminder of your affection."
   },
   {
     id: 4,
     name: "Succulent Plants",
-    price: 5600,
+    price: 1000,
     image: "/images/plant.jpeg",
     description: "A low maintenance plant that symbolizes growth and nurturing."
   }
