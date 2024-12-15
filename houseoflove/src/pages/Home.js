@@ -79,32 +79,33 @@ const Home = () => {
   return (
     <div className="bg-pink-50 min-h-screen">
       <header className="relative h-screen flex">
-        <div className="w-3/4 bg-[#FFD582] flex items-center justify-center relative">
-          <div className="absolute inset-y-0 right-0 w-1 bg-white"></div>
-          <div className="p-12">
-            <h2 className="text-4xl font-bold mb-6 text-[#111111]">
-              Create Beautiful<br />
-              Memories for You and<br />
-              Your Loved One
-            </h2>
-            <div className="flex space-x-4">
-              <Link to="/explore" className="bg-[#111111] text-white px-6 py-3 rounded-[20px] hover:bg-gray-800 transition duration-300">
-                Explore Now
-              </Link>
-              <Link to="/shop" className="bg-[#111111] text-white px-6 py-3 rounded-[20px] hover:bg-gray-800 transition duration-300">
-                Shop Now
-              </Link>
-            </div>
-          </div>
+    {/* Left Section: Message and Button with Gradient Background */}
+    <div className="w-3/4 bg-gradient-to-r from-[#FFB300] via-[#FFA600] to-[#FFA600] flex items-center justify-center relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-black opacity-30"></div> {/* Dark Gradient Overlay */}
+      <div className="p-12 text-center md:text-left relative z-10">
+        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[#111111] leading-tight tracking-wide drop-shadow-lg">
+          Create Beautiful Memories for<br />You and Your Loved One
+        </h2>
+        <div className="flex justify-center md:justify-start space-x-4">
+          <Link
+            to="/products"
+            className="bg-[#111111] text-white px-6 py-3 rounded-[20px] hover:bg-gray-800 transition duration-300"
+          >
+            Shop Now
+          </Link>
         </div>
-        <div className="w-1/2 bg-[#FFF1F1] flex items-center justify-center">
-          <img
-            src="/placeholder.svg"
-            alt="Romantic couple"
-            className="object-cover w-full h-full"
-          />
-        </div>
-      </header>
+      </div>
+    </div>
+    
+    {/* Right Section: Image */}
+    <div className="w-1/2 bg-[#FFF1F1] flex items-center justify-center">
+      <img
+        src="/images/gift.jpeg"
+        alt="Romantic couple"
+        className="object-cover w-full h-full"
+      />
+    </div>
+  </header>
 
       <main className="container mx-auto py-12 px-4">
         <section className="mb-16">
