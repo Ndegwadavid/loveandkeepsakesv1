@@ -87,12 +87,14 @@ const Home = () => {
           Create Beautiful Memories for<br />You and Your Loved One
         </h2>
         <div className="flex justify-center md:justify-start space-x-4">
-          <Link
-            to="/products"
-            className="bg-[#111111] text-white px-6 py-3 rounded-[20px] hover:bg-gray-800 transition duration-300"
-          >
-            Shop Now
-          </Link>
+        <Link
+  to="/products"
+  className="bg-[#111111] text-white px-6 py-3 rounded-[20px] transition duration-300 shadow-lg"
+>
+  Shop Now
+</Link>
+
+
         </div>
       </div>
     </div>
