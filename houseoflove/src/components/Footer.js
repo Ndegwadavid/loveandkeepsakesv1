@@ -13,9 +13,9 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Houseoflove</h3>
             <p className="mb-4">Your one-stop shop for all things beautiful and unique.</p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-pink-500"><Facebook /></a>
-              <a href="#" className="hover:text-pink-500"><Instagram /></a>
-              <a href="#" className="hover:text-pink-500"><Twitter /></a>
+              <a href="https://facebook.com" className="hover:text-pink-500"><Facebook /></a>
+              <a href="https://instagram.com" className="hover:text-pink-500"><Instagram /></a>
+              <a href="https://twitter.com" className="hover:text-pink-500"><Twitter /></a>
             </div>
           </div>
           <div>
