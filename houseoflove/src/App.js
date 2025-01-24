@@ -1,4 +1,5 @@
 import React from 'react';
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
@@ -36,9 +37,9 @@ const App = () => {
           </FavoritesProvider>
         </CartProvider>
       </AuthProvider>
+      <SpeedInsights />
     </Router>
   );
 };
 
 export default App;
-
