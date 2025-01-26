@@ -20,6 +20,7 @@ import BookCategory from './pages/books/BookCategory';
 import BookCustomizer from './pages/books/BookCustomizer';
 // book customizer context
 import { BookProvider } from './context/BookContext';
+import BookPreview from './pages/books/BookPreview';
 
 
 const App = () => {
@@ -31,18 +32,19 @@ const App = () => {
           <BookProvider>
             <Layout>
               <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/auth/login" element={<Login />} />
-                <Route path="/auth/register" element={<Register />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/favorites" element={<Favorites />} />
-                <Route path="/checkout" element={<Checkout />} />
-                <Route path="/checkout/success" element={<CheckoutSuccess />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/books" element={<Books />} />
-                <Route path="/books/:category" element={<BookCategory />} />
-                <Route path="/books/:category/:type" element={<BookCustomizer />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/auth/login" element={<Login />} />
+              <Route path="/auth/register" element={<Register />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkout/success" element={<CheckoutSuccess />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/books" element={<Books />} />
+              <Route path="/books/:category" element={<BookCategory />} />
+              <Route path="/books/:category/:type" element={<BookCustomizer />} />
+              <Route path="/books/:category/:type/preview" element={<BookPreview />} />
               </Routes>
             </Layout>
             </BookProvider>
