@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBook } from '../../context/BookContext';
 
@@ -6,6 +6,7 @@ const BookCustomizer = () => {
   const { category, type } = useParams();
   const navigate = useNavigate();
   const containerRef = useRef(null);
+  const textRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 50, y: 80 });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -16,51 +17,56 @@ const BookCustomizer = () => {
   const { getBookState, updateBookState } = useBook();
   const state = getBookState(category, type);
 
-  const getEventCoordinates = (e) => {
+  // Helper function to get event coordinates (for touch and mouse events)
+  const getEventCoordinates = useCallback((e) => {
     const touch = e.touches ? e.touches[0] : e;
     return {
       clientX: touch.clientX,
       clientY: touch.clientY
     };
-  };
+  }, []);
 
-  const handleStart = (e) => {
-    if (containerRef.current) {
+  // Handle the start of dragging
+  const handleStart = useCallback((e) => {
+    if (containerRef.current && textRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       const coords = getEventCoordinates(e);
 
-      const offsetX = coords.clientX - rect.left;
-      const offsetY = coords.clientY - rect.top;
+      const offsetX = coords.clientX - rect.left - position.x;
+      const offsetY = coords.clientY - rect.top - position.y;
 
       setOffset({ x: offsetX, y: offsetY });
       setIsDragging(true);
 
       e.preventDefault();
     }
-  };
+  }, [getEventCoordinates, position.x, position.y]);
 
-  const handleMove = (e) => {
+  // Handle dragging movement
+  const handleMove = useCallback((e) => {
     if (isDragging && containerRef.current) {
       const coords = getEventCoordinates(e);
       const rect = containerRef.current.getBoundingClientRect();
 
-      const x = ((coords.clientX - rect.left) / rect.width) * 100;
-      const y = ((coords.clientY - rect.top) / rect.height) * 100;
+      const x = coords.clientX - rect.left - offset.x;
+      const y = coords.clientY - rect.top - offset.y;
 
       setPosition({
-        x: Math.max(0, Math.min(100, x)),
-        y: Math.max(0, Math.min(100, y))
+        x: Math.max(0, Math.min(rect.width, x)),
+        y: Math.max(0, Math.min(rect.height, y))
       });
 
       e.preventDefault();
     }
-  };
+  }, [isDragging, offset.x, offset.y, getEventCoordinates]);
 
-  const handleEnd = () => {
+  // Handle the end of dragging
+  const handleEnd = useCallback(() => {
     setIsDragging(false);
-  };
+  }, []);
 
-  const handleTextChange = (e) => {
+  // Handle text changes
+  const handleTextChange = useCallback((e) => {
     const newState = {
       ...state,
       texts: state.texts.map((text, idx) =>
@@ -68,20 +74,24 @@ const BookCustomizer = () => {
       )
     };
     updateBookState(category, type, newState);
-  };
+  }, [state, category, type, updateBookState]);
 
-  const handleFontSizeChange = (e) => {
-    setFontSize(e.target.value);
-  };
+  // Handle font size changes
+  const handleFontSizeChange = useCallback((e) => {
+    setFontSize(Number(e.target.value));
+  }, []);
 
-  const handleFontColorChange = (e) => {
+  // Handle font color changes
+  const handleFontColorChange = useCallback((e) => {
     setFontColor(e.target.value);
-  };
+  }, []);
 
-  const handleFontStyleChange = (e) => {
+  // Handle font style changes
+  const handleFontStyleChange = useCallback((e) => {
     setFontStyle(e.target.value);
-  };
+  }, []);
 
+  // Add event listeners for touch and mouse events
   useEffect(() => {
     const container = containerRef.current;
 
@@ -94,12 +104,13 @@ const BookCustomizer = () => {
       container.removeEventListener('touchmove', handleMove);
       container.removeEventListener('touchend', handleEnd);
     };
-  }, [isDragging]);
+  }, [handleStart, handleMove, handleEnd]);
 
   return (
     <div className="min-h-screen bg-white py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+          {/* Book Customization Area */}
           <div className="xl:col-span-2 bg-white rounded-2xl shadow-xl p-6">
             <div
               ref={containerRef}
@@ -118,26 +129,28 @@ const BookCustomizer = () => {
                 draggable="false"
               />
               <div
+                ref={textRef}
                 contentEditable="true"
                 onInput={handleTextChange}
-                className={`absolute font-bold p-3 border rounded-lg cursor-move transition-all duration-300 ease-out focus:outline-pink-600`}
+                className={`absolute font-bold p-3 cursor-move transition-all duration-300 ease-out focus:outline-none`}
                 style={{
-                  left: `${position.x}%`,
-                  top: `${position.y}%`,
-                  transform: 'translate(-50%, -50%)',
-                  width: '300px',
-                  minHeight: '100px',
-                  background: 'white',
-                  boxShadow: isDragging ? '0 0 15px rgba(0,0,0,0.2)' : 'none',
+                  left: `${position.x}px`,
+                  top: `${position.y}px`,
                   fontSize: `${fontSize}px`,
                   color: fontColor,
-                  fontFamily: fontStyle
+                  fontFamily: fontStyle,
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  outline: 'none',
+                  boxShadow: 'none',
+                  userSelect: 'text' // Allow text selection
                 }}
               >
                 {state.texts[state.currentPage]}
               </div>
             </div>
 
+            {/* Pagination Controls */}
             <div className="mt-8 flex justify-between items-center">
               <button
                 onClick={() => {
@@ -170,7 +183,8 @@ const BookCustomizer = () => {
               </button>
             </div>
 
-            <div className="mt-8 grid grid-cols-3 gap-4">
+            {/* Customization Controls */}
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label htmlFor="font-size" className="block text-sm font-medium text-gray-700">
                   Font Size
@@ -216,38 +230,35 @@ const BookCustomizer = () => {
             </div>
           </div>
 
+          {/* Book Details Sidebar */}
           <div className="bg-white rounded-2xl shadow-xl p-6 h-fit sticky top-12">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">Book Details</h2>
-
             <div className="space-y-4">
               <div>
                 <p className="text-sm text-gray-600">Category</p>
                 <p className="text-lg font-semibold capitalize">{category}</p>
               </div>
-
               <div>
                 <p className="text-sm text-gray-600">Book Type</p>
                 <p className="text-lg font-semibold capitalize">{type}</p>
               </div>
-
               <div>
                 <p className="text-sm text-gray-600">Total Pages</p>
                 <p className="text-lg font-semibold">8</p>
               </div>
             </div>
-
             <button
- onClick={() => navigate(`/books/${category}/${type}/preview`, { 
-   state: {
-     texts: state.texts,
-     styles: state.styles,
-     currentPage: state.currentPage
-   }
- })}
- className="w-full py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors mt-6"
->
- Preview Book
-</button>
+              onClick={() => navigate(`/books/${category}/${type}/preview`, { 
+                state: {
+                  texts: state.texts,
+                  styles: state.styles,
+                  currentPage: state.currentPage
+                }
+              })}
+              className="w-full py-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors mt-6"
+            >
+              Preview Book
+            </button>
           </div>
         </div>
       </div>

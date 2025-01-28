@@ -23,7 +23,7 @@ const defaultStyle = {
 
 const initialBookState = (category, type) => ({
  currentPage: 0,
- texts: defaultTexts[`${category}/${type}`] || Array(8).fill('Add your message here...'),
+ texts: defaultTexts[`${category}/${type}`] || Array(8).fill(''),
  positions: Array(8).fill({ x: 50, y: 50 }),
  styles: Array(8).fill(defaultStyle)
 });

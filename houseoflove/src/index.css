@@ -32,3 +32,6 @@
     @apply bg-white rounded-lg shadow-md p-4;
   }
 }
+.perspective {
+  perspective: 2000px;
+}

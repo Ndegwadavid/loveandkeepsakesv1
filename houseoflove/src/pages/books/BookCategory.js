@@ -25,26 +25,23 @@ const categoryData = {
   love: {
     title: "Love Books",
     subtitle: "Express your love in the most beautiful way",
-    description: "Create a personalized love book that captures your feelings",
     types: [
-      { 
-        name: "Male to Female",
-        path: "male-to-female",
-        description: "Express your love to her in the most romantic way",
-        coverImage: "/images/books/love/male-to-female/img0.png"
-      },
       { 
         name: "Female to Male", 
         path: "female-to-male",
         description: "Tell him how much he means to you",
         coverImage: "/images/books/love/female-to-male/img0.png"
-      }
+      },
+      { 
+        name: "Male to Female",
+        path: "male-to-female",
+        coverImage: "/images/books/love/male-to-female/img0.png"
+      },
     ]
   },
   birthday: {
     title: "Birthday Books",
     subtitle: "Make their special day memorable",
-    description: "Create a custom birthday book filled with heartfelt wishes",
     types: [
       {
         name: "Male to Female",
@@ -71,7 +68,6 @@ const categoryData = {
   girly: {
     title: "Girly Books",
     subtitle: "Share special moments with your girlfriends",
-    description: "Create a beautiful book for your female friends",
     coverImage: "/images/books/love/female-to-male/img0.png",
     types: [
       {
