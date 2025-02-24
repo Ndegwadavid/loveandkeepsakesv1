@@ -42,7 +42,7 @@ const Navbar = () => {
         <div className="flex items-center">
           <Link to="/" className="flex items-center space-x-2 hover:opacity-90 transition-opacity">
             <img src="/images/2.svg" alt="Houseoflove" className="h-8 w-auto" />
-            <span className="text-2xl font-bold text-black-1000">House of Love</span>
+            <span className="text-2xl font-bold text-black-1000">Alicestores</span>
           </Link>
         </div>
 
